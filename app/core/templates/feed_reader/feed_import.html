@@ -1,0 +1,25 @@
+{% extends 'layouts/index.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block feed_list %}
+<div class="container bootstrap snippets bootdeys">
+    <div class="panel panel-body">
+        {% if message %}
+            <div class="success">
+             <p class="success-heading">{{ message.title }}</p> 
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <table>{{ form|crispy }}</table>
+            <button type="submit" class="btn btn-primary">Import feed!</button>
+          </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
