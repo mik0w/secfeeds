@@ -1,0 +1,65 @@
+{% extends 'layouts/index.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block feed_list %}
+<div class="container bootstrap snippets bootdeys">
+    <div class="panel panel-body">
+        {% if message %}
+            <div class="success">
+             <p class="success-heading">{{ message.title }}</p> 
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <table>{{ form|crispy }}</table>
+            {% if not message %}
+            <button type="submit" class="btn btn-primary">Import feed!</button>
+            {% endif %}
+            {% if message %}
+            <button type="submit" class="btn btn-primary">Refresh!</button>
+            {% endif %}
+          </form>
+        </div>
+    
+
+
+
+<div class="row">
+    <div class="col-md-12">
+    <table class="table responsive" id="companies">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">feed URL</th>
+          <th scope="col">is verified</th>
+          <th scope="col">date of the last news</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for feed in feeds %}
+        <tr>
+          <td data-table-header="id">{{ feed.id }}</td>
+          <td data-table-header="feed_url">{{ feed.feed_url }}</td>
+          <td data-table-header="is_verified">{{ feed.is_verified }}</td>
+          <td data-table-header="date_of_the_last">2020-11-11</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+  $("#companies").DataTable({
+    autoWidth: true
+  });
+});
+</script>
+{% endblock javascripts %}

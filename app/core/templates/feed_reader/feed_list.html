@@ -1,0 +1,42 @@
+{% extends 'layouts/index.html' %}
+
+{% block feed_list %}
+<div class="container bootstrap snippets bootdeys">
+    <div class="panel panel-body">
+        <div class="container">
+        </div>
+        <!-- Timeline -->
+        <!--===================================================-->
+        <div class="timeline">
+
+            <!-- Timeline header -->
+            <div class="timeline-header">
+                <div class="timeline-header-title bg-success">Now</div>
+            </div>
+            {% for feed in feeds %}
+            {{feed.name}}
+            <!-- <div class="timeline-entry">
+                <div class="timeline-stat">
+                    <div class="timeline-icon"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Profile picture">
+                    </div>
+                    <div class="timeline-time">30 Min ago</div>
+                </div>
+                <div class="timeline-label">
+                    <p class="mar-no pad-btm"><a href="#" class="btn-link text-semibold">Maria J.</a> shared an image</p>
+                    <div class="img-holder">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Image">
+                    </div>
+                </div>
+            </div> -->
+            {% endfor %}
+           
+                <div class="timeline-label">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+                </div>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- End Timeline -->
+    </div>
+</div>
+{% endblock %}
