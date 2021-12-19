@@ -272,3 +272,7 @@ body{
 .mar-top {
     margin-top: 15px;
 }
+
+.text-alert {
+    color: rgb(255, 94, 0);
+}

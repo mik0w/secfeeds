@@ -20,5 +20,5 @@ from core.views import feed_list, feed_import
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', feed_list, name='feed_list'),
-    path('feed_import', feed_import, name='feed_import'),
+    path('feeds', feed_import, name='feeds'),
 ]

@@ -13,8 +13,8 @@
 
         <form method="post">
             {% csrf_token %}
-            <table>{{ form|crispy }}</table>
             {% if not message %}
+            <table>{{ form|crispy }}</table>
             <button type="submit" class="btn btn-primary">Import feed!</button>
             {% endif %}
             {% if message %}
@@ -31,19 +31,21 @@
     <table class="table responsive" id="companies">
       <thead>
         <tr>
-          <th scope="col">id</th>
-          <th scope="col">feed URL</th>
-          <th scope="col">is verified</th>
-          <th scope="col">date of the last news</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed name</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed URL</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>is verified</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>date of the last news</th>
+          <th scope="col">actions</th>
         </tr>
       </thead>
       <tbody>
         {% for feed in feeds %}
         <tr>
-          <td data-table-header="id">{{ feed.id }}</td>
+          <td data-table-header="id">{{ feed.feed_name }}</td>
           <td data-table-header="feed_url">{{ feed.feed_url }}</td>
-          <td data-table-header="is_verified">{{ feed.is_verified }}</td>
+          <td data-table-header="is_verified" {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</td>
           <td data-table-header="date_of_the_last">2020-11-11</td>
+          <td data-table-header="actions"><span class="material-icons" style="font-size: small;">refresh</span><span class="material-icons" style="font-size: small;">edit</span><span class="material-icons" style="font-size: small;">delete</span></td>
         </tr>
         {% endfor %}
       </tbody>
