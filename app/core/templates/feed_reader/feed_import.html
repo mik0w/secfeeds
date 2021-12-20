@@ -31,6 +31,7 @@
     <table class="table responsive" id="companies">
       <thead>
         <tr>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>id</th>
           <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed name</th>
           <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed URL</th>
           <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>is verified</th>
@@ -41,7 +42,8 @@
       <tbody>
         {% for feed in feeds %}
         <tr>
-          <td data-table-header="id">{{ feed.feed_name }}</td>
+          <td data-table-header="id">{{ feed.pk }}</td>
+          <td data-table-header="feed_name">{{ feed.feed_name }}</td>
           <td data-table-header="feed_url">{{ feed.feed_url }}</td>
           <td data-table-header="is_verified" {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</td>
           <td data-table-header="date_of_the_last">2020-11-11</td>
