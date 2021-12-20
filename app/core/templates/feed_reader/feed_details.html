@@ -1,0 +1,23 @@
+{% extends 'layouts/index.html' %}
+
+{% block feedapp %}
+<p>{{ feed.pk }}</p>
+<p>{{ feed.feed_name }}<p>
+<p>{{ feed.feed_url }}</p>
+<p {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</p>
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+  $("#companies").DataTable({
+    autoWidth: true
+  });
+});
+</script>
+{% endblock javascripts %}
+
+
+

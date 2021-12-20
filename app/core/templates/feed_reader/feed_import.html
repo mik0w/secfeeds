@@ -2,7 +2,7 @@
 
 {% load crispy_forms_tags %}
 
-{% block feed_list %}
+{% block feedapp %}
 <div class="container bootstrap snippets bootdeys">
     <div class="panel panel-body">
         {% if message %}
@@ -43,7 +43,7 @@
         {% for feed in feeds %}
         <tr>
           <td data-table-header="id">{{ feed.pk }}</td>
-          <td data-table-header="feed_name">{{ feed.feed_name }}</td>
+          <td data-table-header="feed_name"><a href="{% url 'feed_details' feed.pk %}">{{ feed.feed_name }}</a></td>
           <td data-table-header="feed_url">{{ feed.feed_url }}</td>
           <td data-table-header="is_verified" {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</td>
           <td data-table-header="date_of_the_last">2020-11-11</td>

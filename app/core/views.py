@@ -4,9 +4,9 @@ from core.forms import CheckFeedForm
 from core.tasks import check_feed
 
 
-def feed_list(request):
-    feeds = FeedData.objects.all()
-    return render(request, 'feed_reader/feed_list.html', {'feeds': feeds})
+def feed_details(request, feed_id):
+    feed = FeedData.objects.get(pk=feed_id)
+    return render(request, 'feed_reader/feed_details.html', {'feed': feed})
 
 def feed_import(request):
     feeds = FeedData.objects.all()
