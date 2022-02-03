@@ -5,6 +5,19 @@
 __pycache__
 db.sqlite3
 media
+*.pyc
+.idea
+.vscode
+*/*.pyc
+*/*/*.pyc
+*/*/migrations/*
+!*/*/migrations/__init__.py
+./src/static/*
+/__pycache__
+.DS_Store
+.env
+**/.DS_Store
+
 
 # Backup files # 
 *.bak 
@@ -135,3 +148,5 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+app/core/__pycache__/

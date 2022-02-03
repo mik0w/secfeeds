@@ -1,6 +1,5 @@
-# docker-django-redis-celery
-Initial configuration of Docker Django Redis Celery
-
+# (sec)feeds parser
+RSS feed parser with asynchronous backend with Celery and Redis. Project status is WIP. 
 ## Getting Started
 This project works on Python 3+ and Django 2+.
 Simply, run the following command:
@@ -8,4 +7,4 @@ Simply, run the following command:
 docker-compose up --build
 ```
 
-Follow me on IG for more: https://www.instagram.com/coderasha
+Basing on the docker-django-redis-celery boilerplate from https://github.com/thepylot/docker-django-redis-celery.

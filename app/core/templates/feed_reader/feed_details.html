@@ -1,0 +1,27 @@
+{% extends 'layouts/index.html' %}
+
+{% block feedapp %}
+<h1 class="mt-2"><p>{{ feed.feed_name }}<p></h1>
+<p>Feed ID: <span class="font-weight-bold">{{ feed.pk }}</span></p>
+
+<p>Feed URL: <span class="font-weight-bold"><a href="{{ feed.feed_url }}">{{ feed.feed_url }}</a></span></p>
+<p>Is verified: <span class="font-weight-bold {% if not feed.is_verified%}text-alert{% endif %}">{{ feed.is_verified }}</span></p>
+
+{% for message in feed_messages %}
+{{ message }}
+{% endfor %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+  $("#companies").DataTable({
+    autoWidth: true
+  });
+});
+</script>
+{% endblock javascripts %}
+
+
+

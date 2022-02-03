@@ -2,24 +2,68 @@
 
 {% load crispy_forms_tags %}
 
-{% block feed_list %}
+{% block feedapp %}
 <div class="container bootstrap snippets bootdeys">
     <div class="panel panel-body">
         {% if message %}
             <div class="success">
              <p class="success-heading">{{ message.title }}</p> 
-             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-            </button>
             </div>
         {% endif %}
 
         <form method="post">
             {% csrf_token %}
+            {% if not message %}
             <table>{{ form|crispy }}</table>
             <button type="submit" class="btn btn-primary">Import feed!</button>
+            {% endif %}
+            {% if message %}
+            <button type="submit" class="btn btn-primary">Refresh!</button>
+            {% endif %}
           </form>
         </div>
-    </div>
+    
+
+
+
+<div class="row">
+    <div class="col-md-12">
+    <table class="table responsive" id="companies">
+      <thead>
+        <tr>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>id</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed name</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed URL</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>is verified</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>date of the last news</th>
+          <th scope="col">actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for feed in feeds %}
+        <tr>
+          <td data-table-header="id">{{ feed.pk }}</td>
+          <td data-table-header="feed_name"><a href="{% url 'feed_details' feed.pk %}">{{ feed.feed_name }}</a></td>
+          <td data-table-header="feed_url">{{ feed.feed_url }}</td>
+          <td data-table-header="is_verified" {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</td>
+          <td data-table-header="date_of_the_last">2020-11-11</td>
+          <td data-table-header="actions"><a href="{% url 'feed_refresh' feed.pk %}"><span class="material-icons" style="font-size: small;">refresh</span></a><a href="{% url 'feed_details' feed.pk %}"><span class="material-icons" style="font-size: small;">edit</span></a><span class="material-icons" style="font-size: small;">delete</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
+</div>
+
 {% endblock %}
+
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+  $("#companies").DataTable({
+    autoWidth: true
+  });
+});
+</script>
+{% endblock javascripts %}

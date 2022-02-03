@@ -1,14 +1,30 @@
 from django.shortcuts import render
-from core.models import FeedData
+from core.models import FeedData, FeedMessage
 from core.forms import CheckFeedForm
-from core.tasks import check_feed
+from core.tasks import check_feed, download_feed
 
 
-def feed_list(request):
+def feed_details(request, feed_id):
+    feed = FeedData.objects.get(pk=feed_id)
+    feed_messages = FeedMessage.objects.filter(feed_kind=feed)
+    print(feed_messages)
+    return render(request, 'feed_reader/feed_details.html', {'feed': feed, 'feed_messages': feed_messages})
+
+def feed_refresh(request, feed_id):
     feeds = FeedData.objects.all()
-    return render(request, 'feed_reader/feed_list.html', {'feeds': feeds})
+    feed = FeedData.objects.get(pk=feed_id)
+    feed_url = feed.feed_url
+    download_feed.apply_async(args=[feed_url], countdown=5)
+    return render(
+                    request, 
+                    'feed_reader/feed_import.html',
+                    {
+                    'message': {'title': 'Feed ' + str(feed_id) + ' (' + str(feed_url) + ')' + ' is being refreshed and the data is being loaded!'},
+                    'feeds': feeds
+                })
 
 def feed_import(request):
+    feeds = FeedData.objects.all()
     form = CheckFeedForm()
     if request.method == "POST":
         form = CheckFeedForm(request.POST)
@@ -20,19 +36,34 @@ def feed_import(request):
                     request, 
                     'feed_reader/feed_import.html',
                     {
-                    'message': {'title': 'Feed is being verified!'}
+                    'message': {'title': 'Feed is being verified!'},
+                    'feeds': feeds
                 })
     
         else:
             form = CheckFeedForm()
-    return render(request, 'feed_reader/feed_import.html', {'form': form})
+    return render(request, 'feed_reader/feed_import.html', {'form': form, 'feeds': feeds})
 
 
-    def verify_feed(self):
-        if check_feed():
-            pass
-        else:
-            return False
+# def feed_refresh(request, feed_id):
+    
+#     feed_data = FeedData.objects.get(pk=feed_id)
+#     feeds = FeedData.objects.all()
+    
+#     return render(
+#                     request, 
+#                     'feed_reader/feed_import.html',
+#                     {
+#                     'message': {'title':  + ' is being refreshed!'},
+#                     'feeds': feeds
+#                 })
+
+
+def verify_feed(self):
+    if check_feed():
+        pass
+    else:
+        return False
 
 
 
