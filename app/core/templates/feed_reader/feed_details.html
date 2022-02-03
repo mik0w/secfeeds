@@ -6,6 +6,9 @@
 <p>{{ feed.feed_url }}</p>
 <p {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</p>
 
+{% for message in feed_messages %}
+{{ message }}
+{% endfor %}
 
 {% endblock %}
 

@@ -47,7 +47,7 @@
           <td data-table-header="feed_url">{{ feed.feed_url }}</td>
           <td data-table-header="is_verified" {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</td>
           <td data-table-header="date_of_the_last">2020-11-11</td>
-          <td data-table-header="actions"><span class="material-icons" style="font-size: small;">refresh</span><span class="material-icons" style="font-size: small;">edit</span><span class="material-icons" style="font-size: small;">delete</span></td>
+          <td data-table-header="actions"><a href="{% url 'feed_refresh' feed.pk %}"><span class="material-icons" style="font-size: small;">refresh</span></a><a href="{% url 'feed_details' feed.pk %}"><span class="material-icons" style="font-size: small;">edit</span></a><span class="material-icons" style="font-size: small;">delete</span></td>
         </tr>
         {% endfor %}
       </tbody>

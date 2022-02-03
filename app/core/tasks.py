@@ -3,7 +3,7 @@ from celery import shared_task
 from celery.decorators import task
 import feedparser
 import requests
-from core.models import FeedData
+from core.models import FeedData, FeedMessage
 import logging
 
 
@@ -31,7 +31,23 @@ def check_feed(feed_url : str):
 
 @task(name='download_feed')
 def download_feed(feed_url : str):
+    NewsFeed = feedparser.parse(feed_url)
+    entries = NewsFeed.entries
+    print(str(entries))
+    print(str(feed_url))
+    for entry in entries:
+        print(str(entry))
+        title = str(entry['title'])
+        title_detail = str(entry['title_detail'])
+        # published = str(entry['published'])
+        link = str(entry['link'])
+        feed_data = FeedData.objects.get(feed_url=feed_url)
+        data = FeedMessage.objects.create(feed_kind=feed_data, title=title, title_detail=title_detail, link=link)
+        data.save()
     pass
+
+
+
 
 
 @task(name='refresh_feed')

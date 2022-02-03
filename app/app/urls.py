@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import feed_import, feed_details
+from core.views import feed_import, feed_details, feed_refresh, feed_download
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('feeds', feed_import, name='feeds'),
     path(r'feeds/<int:feed_id>/', feed_details, name='feed_details'),
+    path(r'feeds/refresh/<int:feed_id>/', feed_refresh, name='feed_refresh'),
+    path(r'feeds/download/<int:feed_id>/', feed_download, name='feed_download'),
 ]
