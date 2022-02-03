@@ -10,16 +10,16 @@ def feed_details(request, feed_id):
     print(feed_messages)
     return render(request, 'feed_reader/feed_details.html', {'feed': feed, 'feed_messages': feed_messages})
 
-def feed_download(request, feed_id):
+def feed_refresh(request, feed_id):
     feeds = FeedData.objects.all()
-    feed = FeedData.objects.get(pk = feed_id)
+    feed = FeedData.objects.get(pk=feed_id)
     feed_url = feed.feed_url
     download_feed.apply_async(args=[feed_url], countdown=5)
     return render(
                     request, 
                     'feed_reader/feed_import.html',
                     {
-                    'message': {'title': 'Feed data is being downloaded!'},
+                    'message': {'title': 'Feed ' + str(feed_id) + ' (' + str(feed_url) + ')' + ' is being refreshed and the data is being loaded!'},
                     'feeds': feeds
                 })
 
@@ -45,18 +45,18 @@ def feed_import(request):
     return render(request, 'feed_reader/feed_import.html', {'form': form, 'feeds': feeds})
 
 
-def feed_refresh(request, feed_id):
+# def feed_refresh(request, feed_id):
     
-    feed_data = FeedData.objects.get(pk=feed_id)
-    feeds = FeedData.objects.all()
+#     feed_data = FeedData.objects.get(pk=feed_id)
+#     feeds = FeedData.objects.all()
     
-    return render(
-                    request, 
-                    'feed_reader/feed_import.html',
-                    {
-                    'message': {'title': 'Feed ' + str(feed_id) + ' (' + str(feed_data) + ')' + ' is being refreshed!'},
-                    'feeds': feeds
-                })
+#     return render(
+#                     request, 
+#                     'feed_reader/feed_import.html',
+#                     {
+#                     'message': {'title':  + ' is being refreshed!'},
+#                     'feeds': feeds
+#                 })
 
 
 def verify_feed(self):

@@ -1,10 +1,11 @@
 {% extends 'layouts/index.html' %}
 
 {% block feedapp %}
-<p>{{ feed.pk }}</p>
-<p>{{ feed.feed_name }}<p>
-<p>{{ feed.feed_url }}</p>
-<p {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</p>
+<h1 class="mt-2"><p>{{ feed.feed_name }}<p></h1>
+<p>Feed ID: <span class="font-weight-bold">{{ feed.pk }}</span></p>
+
+<p>Feed URL: <span class="font-weight-bold"><a href="{{ feed.feed_url }}">{{ feed.feed_url }}</a></span></p>
+<p>Is verified: <span class="font-weight-bold {% if not feed.is_verified%}text-alert{% endif %}">{{ feed.is_verified }}</span></p>
 
 {% for message in feed_messages %}
 {{ message }}
