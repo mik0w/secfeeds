@@ -5,6 +5,9 @@ import feedparser
 import requests
 from core.models import FeedData, FeedMessage
 import logging
+from datetime import datetime
+from dateutil.parser import parse
+
 
 
 @task(name='check_feed')
@@ -38,11 +41,12 @@ def download_feed(feed_url : str):
     for entry in entries:
         print(str(entry))
         title = str(entry['title'])
-        title_detail = str(entry['title_detail'])
-        # published = str(entry['published'])
+        summary = str(entry['summary'])
+        published = parse(entry['published']) # parse method is from dateutil.parse 
+        print(str(published) + '' + str(type(published)))
         link = str(entry['link'])
         feed_data = FeedData.objects.get(feed_url=feed_url)
-        data = FeedMessage.objects.create(feed_kind=feed_data, title=title, title_detail=title_detail, link=link)
+        data = FeedMessage.objects.create(feed_kind=feed_data, title=title, summary=summary, published=published, link=link)
         data.save()
     pass
 

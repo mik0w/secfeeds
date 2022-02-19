@@ -5,3 +5,4 @@ psycopg2>=2.7.5,<2.8.
 feedparser
 requests
 django-crispy-forms
+python-dateutil

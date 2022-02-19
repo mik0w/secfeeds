@@ -23,7 +23,7 @@ services:
     env_file:
       - ./.env.dev
     volumes: 
-      - pg_data2:/var/lib/postgresql/data
+      - pg_datastore:/var/lib/postgresql/data
   redis:
     image: redis:alpine
   celery:
@@ -40,4 +40,4 @@ services:
       - redis
       - app
 volumes:
-  pg_data2:
+  pg_datastore:

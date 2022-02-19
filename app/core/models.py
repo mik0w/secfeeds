@@ -13,7 +13,7 @@ class FeedData(models.Model):
 class FeedMessage(models.Model):
     feed_kind = models.ForeignKey(FeedData, on_delete=models.CASCADE)
     title = models.CharField(max_length=500, default = 'n/a')
-    title_detail = models.TextField(default = 'n/a')
+    summary = models.TextField(default = 'n/a')
     published = models.DateField(default=date.today())
     link = models.URLField(max_length=350) #dodac unique=True
 

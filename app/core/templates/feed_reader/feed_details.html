@@ -7,10 +7,21 @@
 <p>Feed URL: <span class="font-weight-bold"><a href="{{ feed.feed_url }}">{{ feed.feed_url }}</a></span></p>
 <p>Is verified: <span class="font-weight-bold {% if not feed.is_verified%}text-alert{% endif %}">{{ feed.is_verified }}</span></p>
 
-{% for message in feed_messages %}
-{{ message }}
-{% endfor %}
 
+<div class="row">
+ 
+
+
+{% for message in feed_messages %}
+<div class="col-md-4 mb-5 mt-5 ml-5 mr-5">
+  <h2>{{ message.title }}</h2>
+  <div class="mb-1 mt-1 text-muted">{{ message.published }}</div>
+  <p>{{ message.summary }}</p>
+  <p><a class="btn btn-secondary" href="{{ message.link }}" role="button">View details »</a></p>
+</div>
+
+{% endfor %}
+</div>
 {% endblock %}
 
 {% block javascripts %}
