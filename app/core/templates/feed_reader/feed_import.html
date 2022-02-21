@@ -35,7 +35,7 @@
           <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed name</th>
           <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>feed URL</th>
           <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>is verified</th>
-          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>date of the last news</th>
+          <th scope="col"><span class="material-icons" style="font-size: small;">sort</span>date of the last update</th>
           <th scope="col">actions</th>
         </tr>
       </thead>
@@ -46,7 +46,7 @@
           <td data-table-header="feed_name"><a href="{% url 'feed_details' feed.pk %}">{{ feed.feed_name }}</a></td>
           <td data-table-header="feed_url">{{ feed.feed_url }}</td>
           <td data-table-header="is_verified" {% if not feed.is_verified%}class="text-alert"{% endif %}>{{ feed.is_verified }}</td>
-          <td data-table-header="date_of_the_last">2020-11-11</td>
+          <td data-table-header="date_of_the_last">{{ feed.last_update }}</td>
           <td data-table-header="actions"><a href="{% url 'feed_refresh' feed.pk %}"><span class="material-icons" style="font-size: small;">refresh</span></a><a href="{% url 'feed_details' feed.pk %}"><span class="material-icons" style="font-size: small;">edit</span></a><span class="material-icons" style="font-size: small;">delete</span></td>
         </tr>
         {% endfor %}

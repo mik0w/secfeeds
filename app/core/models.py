@@ -6,6 +6,7 @@ class FeedData(models.Model):
     feed_url = models.URLField(max_length=350, unique=True)
     feed_name = models.CharField(max_length=250, default='')
     is_verified = models.BooleanField(default=False)
+    last_update = models.DateField(default=date(1970, 1, 1))
     
     def __str__(self):
           return self.feed_url

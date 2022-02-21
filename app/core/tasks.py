@@ -5,7 +5,7 @@ import feedparser
 import requests
 from core.models import FeedData, FeedMessage
 import logging
-from datetime import datetime
+from datetime import datetime, date
 from dateutil.parser import parse
 
 
@@ -48,7 +48,11 @@ def download_feed(feed_url : str):
         feed_data = FeedData.objects.get(feed_url=feed_url)
         data = FeedMessage.objects.create(feed_kind=feed_data, title=title, summary=summary, published=published, link=link)
         data.save()
-    pass
+        
+    parent_feed = FeedData.objects.get(feed_url=feed_url)    
+    parent_feed.last_update = date.today()
+    parent_feed.save()
+
 
 
 
